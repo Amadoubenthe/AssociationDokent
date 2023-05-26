@@ -9,7 +9,6 @@ namespace AssociationDokent.BusinesLogic.Interfaces
 {
     public interface IUser
     {
-        Task CreateAsync(User user);
-        Task<List<User>> GetAsync();
+        Task<List<UserSimplify>> GetSimplifyAsync(string gender = null);
     }
 }

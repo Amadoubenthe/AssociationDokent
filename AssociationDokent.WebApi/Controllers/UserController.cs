@@ -1,7 +1,7 @@
 ﻿using AssociationDokent.BusinesLogic.Interfaces;
 using AssociationDokent.DataAccess.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace AssociationDokent.WebApi.Controllers
 {
@@ -17,9 +17,16 @@ namespace AssociationDokent.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<List<User>> Get()
+        public async Task<List<UserSimplify>> Get()
         {
-            return await _userService.GetAsync(); 
+            return await _userService.GetSimplifyAsync();
         }
+
+        [HttpGet("gender")]
+        public async Task<List<UserSimplify>> GetUsersByGender([FromQuery] string gender)
+        {
+            return await _userService.GetSimplifyAsync(gender);
+        }
+
     }
 }

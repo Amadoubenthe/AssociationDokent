@@ -150,7 +150,7 @@ namespace AssociationDokent.DataAccess.Models
     public class Registered
     {
         [BsonElement("date")]
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         [BsonElement("age")]
         public int Age { get; set; }

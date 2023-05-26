@@ -20,16 +20,34 @@ namespace AssociationDokent.BusinesLogic.Services
         {
             _usersCollection = mongoDBConnection.UsersCollection;
         }
-
-        public async Task CreateAsync(User user)
+        public async Task<List<UserSimplify>> GetSimplifyAsync(string gender = null)
         {
-            await _usersCollection.InsertOneAsync(user);
+            
+            var filter = Builders<User>.Filter.Empty;
+
+            if (gender != null)
+            {
+                filter = Builders<User>.Filter.Eq(u => u.Gender, gender);
+            }
+
+            var filteredUsers = await _usersCollection
+                .Find(filter)
+                .Project(u => new UserSimplify
+                {
+                    Id = u.Id,
+                    Nom = u.Name.First,
+                    Prenom = u.Name.Last,
+                    Email = u.Email,
+                    Telephone = u.Phone,
+                    Genre = u.Gender,
+                    Civilite = u.Name.Title,
+                    DateDeNaissance = u.Registered.Date
+                })
+                .ToListAsync();
+
+            return filteredUsers;
         }
 
-        public async Task<List<User>> GetAsync()
-        {
-            return await _usersCollection.Find(_ => true).ToListAsync();
-        }
 
     }
 }
