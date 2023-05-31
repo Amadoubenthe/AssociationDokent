@@ -1,12 +1,7 @@
 ﻿using AssociationDokent.DataAccess.Models;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AssociationDokent.DataAccess.Data
 {

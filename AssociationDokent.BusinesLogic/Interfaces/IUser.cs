@@ -9,6 +9,7 @@ namespace AssociationDokent.BusinesLogic.Interfaces
 {
     public interface IUser
     {
-        Task<List<UserSimplify>> GetSimplifyAsync(string gender = null);
+        Task<IList<UserSimplify>> GetSimplifyAsync(CancellationToken cancellationToken, string gender = null);
+        /*Task<List<UserGroupedByGenre>> GetUserGroupedByGenre();*/
     }
 }

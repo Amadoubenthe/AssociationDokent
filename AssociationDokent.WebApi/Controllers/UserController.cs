@@ -17,15 +17,15 @@ namespace AssociationDokent.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<List<UserSimplify>> Get()
+        public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {
-            return await _userService.GetSimplifyAsync();
+            return Ok(await _userService.GetSimplifyAsync(cancellationToken, null));
         }
 
         [HttpGet("gender")]
-        public async Task<List<UserSimplify>> GetUsersByGender([FromQuery] string gender)
+        public async Task<IActionResult> GetUsersByGender([FromQuery] string gender, CancellationToken cancellationToken)
         {
-            return await _userService.GetSimplifyAsync(gender);
+            return Ok(await _userService.GetSimplifyAsync(cancellationToken, gender)) ;
         }
 
     }

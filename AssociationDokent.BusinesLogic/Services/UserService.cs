@@ -20,7 +20,7 @@ namespace AssociationDokent.BusinesLogic.Services
         {
             _usersCollection = mongoDBConnection.UsersCollection;
         }
-        public async Task<List<UserSimplify>> GetSimplifyAsync(string gender = null)
+        public async Task<IList<UserSimplify>> GetSimplifyAsync(CancellationToken cancellationToken, string gender = null)
         {
             
             var filter = Builders<User>.Filter.Empty;
@@ -43,11 +43,17 @@ namespace AssociationDokent.BusinesLogic.Services
                     Civilite = u.Name.Title,
                     DateDeNaissance = u.Registered.Date
                 })
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             return filteredUsers;
         }
 
+       /* public async Task<List<UserGroupedByGenre>> GetUserGroupedByGenre()
+        {
+            var female = await this.GetSimplifyAsync("female");
+            var male = await this.GetSimplifyAsync("male");
 
+            return 
+        }*/
     }
 }
